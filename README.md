@@ -1,120 +1,168 @@
-♻️ EcoClassify: An AI-Powered Garbage Classification System
-📄 Overview
-EcoClassify is an AI-powered web application that uses image recognition to classify garbage into multiple categories. The system is built with Convolutional Neural Networks (CNN) and is deployed using Gradio. This project is designed to help promote efficient waste segregation and environmental sustainability.
+# ♻️ EcoClassify: AI‑Powered Garbage Classification System
 
-🚀 Key Features
-Garbage Classification: Classifies waste into 12 distinct categories.
+> **An intelligent waste‑segregation system leveraging deep learning to promote sustainability and responsible recycling.**
 
-Multiple Model Evaluation: The project explores three different models for garbage classification: ResNet50, MobileNetV2, and a Random Forest Classifier.
+---
 
-Web Application: A user-friendly web interface built with Gradio for easy image-based classification.
+## 📄 Overview
 
-Recycling Guidance: Provides a recommended bin color and specific recycling guidance for each classified item.
+**EcoClassify** is an AI‑powered image classification system that automatically identifies different types of garbage and recommends the correct disposal bin along with recycling guidance. The system is built using **Convolutional Neural Networks (CNNs)** and deployed through a clean, interactive **Gradio web interface**.
 
-High Accuracy: The final ResNet50 model achieved a test accuracy of 99.08%, outperforming the other models.
+The goal of this project is to assist individuals and organizations in improving **waste segregation efficiency**, reducing environmental impact, and encouraging sustainable practices.
 
-🧠 Model Performance
-The project evaluated three different models. The ResNet50 model was chosen for the final application due to its superior performance.
+---
 
-Model
+## 🚀 Key Features
 
-Test Accuracy
+* 🧠 **Garbage Classification** – Classifies waste into **12 distinct categories**
+* 🔬 **Multi‑Model Evaluation** – Comparative study of **ResNet50, MobileNetV2, and Random Forest**
+* 🌐 **Web Application** – Simple and intuitive UI powered by **Gradio**
+* 🗑️ **Smart Recycling Guidance** – Displays **bin color + disposal instructions** for each prediction
+* 📈 **High Accuracy** – Final **ResNet50 model achieved 99.08% test accuracy**
 
-Validation Accuracy
+---
 
-ResNet50
+## 🧠 Model Performance Summary
 
-99.08%
+| Model          | Test Accuracy | Validation Accuracy |
+| -------------- | ------------- | ------------------- |
+| **ResNet50** ⭐ | **99.08%**    | **99.58%**          |
+| MobileNetV2    | 90.81%        | 92.89%              |
+| Random Forest  | 85.34%        | N/A                 |
 
-99.58%
+✔️ **ResNet50** was selected for deployment due to its superior and consistent performance.
 
-MobileNetV2
+---
 
-90.81%
+## 🛠️ System Workflow
 
-92.89%
+The project follows a modular and reproducible pipeline:
 
-Random Forest
+1. **📂 Data Splitting**
+   `split_dataset.py` divides the dataset into:
 
-85.34%
+   * Training: **70%**
+   * Validation: **15%**
+   * Testing: **15%**
 
-N/A
+2. **🏋️ Model Training**
+   `train_resnet50.py` fine‑tunes a pre‑trained **ResNet50** model on the garbage dataset.
 
-🛠️ How It Works
-The system follows a clear and modular workflow:
+3. **🔍 Feature Extraction (Alternative Path)**
 
-Data Splitting: The split_dataset.py script divides the raw dataset into training (70%), validation (15%), and testing (15%) sets to ensure a robust evaluation.
+   * `extract_features.py` extracts deep features using ResNet50
+   * `train_rf_classifier.py` trains a **Random Forest** classifier on those features
 
-Model Training: The train_resnet50.py script fine-tunes a pre-trained ResNet50 model on the training dataset to learn garbage features.
+4. **📊 Evaluation**
+   Evaluation scripts generate:
 
-Feature Extraction: An alternative approach uses extract_features.py to get features from ResNet50, which are then used to train a traditional classifier like Random Forest in train_rf_classifier.py.
+   * Accuracy scores
+   * Confusion matrices
+   * Classification reports
 
-Evaluation: Scripts like test_resnet50_model.py rigorously evaluate the trained models, generating classification reports, confusion matrices, and accuracy scores.
+5. **🌐 Web App Deployment**
+   `gradio_resnet_app.py` deploys the best‑performing model using **Gradio**.
 
-Web App Deployment: The gradio_resnet_app.py script uses the best-performing ResNet50 model to power a Gradio-based web application.
+---
 
-💻 Getting Started
-1. Clone the Repository
+## 💻 Getting Started
 
-git clone https://github.com/vanshgargji/ecoclassify.git
-cd vanshgargji-ecoclassify
+### 1️⃣ Clone the Repository
 
-2. Install Dependencies
+```bash
+git clone https://github.com/yatharth1511/EcoClassify.git
+cd EcoClassify
+```
 
-Install all necessary libraries from requirements.txt.
+### 2️⃣ Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-3. Run the Web Application
+### 3️⃣ Run the Web Application
 
-Launch the Gradio interface to start classifying images.
-
+```bash
 python gradio_resnet_app.py
+```
 
-🖼️ Web Application in Action
-The web app is designed to be intuitive. Users upload an image, and the system instantly predicts the garbage class and recommends a bin.
+---
 
-Upload Garbage Image: The user uploads an image of an item to be classified.
+## 🖼️ Web Application Usage
 
-Prediction: The model predicts the class (e.g., "plastic," "paper").
+1. 📤 **Upload an image** of a waste item
+2. 🧠 **Model predicts** the garbage category
+3. 🗑️ **Recommended bin** is displayed
+4. ♻️ **Recycling guidance** is shown for proper disposal
 
-Recommended Bin: The app shows an image of the recommended bin.
+---
 
-Recycling Guidance: A message provides specific instructions on how to dispose of the item.
+## 🗑️ Bin Mapping & Recycling Guidance
 
-Here's a breakdown of the bin mapping and guidance:
+| Bin Color         | Waste Categories                      | Description                   |
+| ----------------- | ------------------------------------- | ----------------------------- |
+| 🟩 **Green Bin**  | Biological, Paper, Cardboard          | Organic & biodegradable waste |
+| 🟦 **Blue Bin**   | Plastic, Metal                        | Recyclable materials          |
+| ⬜ **White Bin**   | Green‑Glass, Brown‑Glass, White‑Glass | Glass waste                   |
+| 🟧 **Orange Bin** | Clothes, Shoes                        | Textile waste                 |
+| 🟥 **Red Bin**    | Trash, Battery                        | General & hazardous waste     |
 
-Green Bin: For organic or biodegradable waste, such as biological, paper, and cardboard.
+---
 
-Blue Bin: For recyclable plastic and metal items, such as plastic and metal.
+## 📈 Detailed Evaluation Results (ResNet50)
 
-White Bin: For glass waste, such as green-glass, brown-glass, and white-glass.
+**Overall Test Accuracy:** **99%**
+Test Samples: **1197**
 
-Orange Bin: For textile waste, such as clothes and shoes.
+### 📊 Classification Report
 
-Red Bin: For general or hazardous waste, such as trash and battery.
+| Class       | Precision | Recall | F1‑Score | Support |
+| ----------- | --------- | ------ | -------- | ------- |
+| Battery     | 0.99      | 0.99   | 0.99     | 101     |
+| Biological  | 1.00      | 1.00   | 1.00     | 101     |
+| Brown‑Glass | 1.00      | 0.99   | 0.99     | 92      |
+| Cardboard   | 0.98      | 0.96   | 0.97     | 101     |
+| Clothes     | 1.00      | 0.99   | 1.00     | 101     |
+| Green‑Glass | 1.00      | 0.99   | 0.99     | 95      |
+| Metal       | 0.95      | 0.99   | 0.97     | 101     |
+| Paper       | 0.99      | 0.99   | 0.99     | 101     |
+| Plastic     | 0.99      | 0.99   | 0.99     | 101     |
+| Shoes       | 1.00      | 1.00   | 1.00     | 101     |
+| Trash       | 1.00      | 1.00   | 1.00     | 101     |
+| White‑Glass | 0.99      | 1.00   | 1.00     | 101     |
 
-📈 Evaluation Results
-The results_resnet50 directory contains the detailed performance metrics for the best model. Below is a summary of the high-level results:
+---
 
-Classification Report
+## 📂 Results Directory
 
-              precision    recall  f1-score   support
+The `results_resnet50/` directory contains:
 
-     battery       0.99      0.99      0.99        101
-  biological       1.00      1.00      1.00        101
- brown-glass       1.00      0.99      0.99         92
-   cardboard       0.98      0.96      0.97        101
-     clothes       1.00      0.99      1.00        101
- green-glass       1.00      0.99      0.99         95
-       metal       0.95      0.99      0.97        101
-       paper       0.99      0.99      0.99        101
-     plastic       0.99      0.99      0.99        101
-       shoes       1.00      1.00      1.00        101
-       trash       1.00      1.00      1.00        101
- white-glass       0.99      1.00      1.00        101
+* Confusion matrices
+* Classification reports
+* Accuracy logs
 
-    accuracy                           0.99       1197
-   macro avg       0.99      0.99      0.99       1197
-weighted avg       0.99      0.99      0.99       1197
+---
 
+## 🌱 Impact & Future Scope
+
+* Integration with **smart bins**
+* Real‑time classification via **mobile camera**
+* Dataset expansion for regional waste categories
+* Lightweight deployment for edge devices
+
+---
+
+## 🤝 Contributors
+
+* **Yatharth Sharma**
+* **Vansh Garg**
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+⭐ *If you found this project useful, feel free to star the repository and contribute!*
