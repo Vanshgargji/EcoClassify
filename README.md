@@ -172,13 +172,7 @@ This is to check that ai review work or not ]
 
 
 
-
-
-
-
-
-
-
+checking garbage is properly classified or not
 
 
 
